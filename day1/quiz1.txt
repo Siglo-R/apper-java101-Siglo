@@ -9,7 +9,7 @@ Java101 Siglo quiz101
 7.false
 8.JAVA_HOME
 9-10.
-class MAIN{
+
   public static void main(String[] args) {
   System.out.println("My Name Is Siglo");
 }
