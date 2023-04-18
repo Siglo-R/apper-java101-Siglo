@@ -13,3 +13,6 @@ Java101 Siglo quiz101
   public static void main(String[] args) {
   System.out.println("My Name Is Siglo");
 }
+
+Bonus Question:
+Something about Yellow (Im sori ser :D)
