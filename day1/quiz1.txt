@@ -7,3 +7,4 @@ Java101 Siglo quiz101
 5.Java Virtual Machine
 6.Runtime Environment
 7.false
+8.JAVA_HOME
