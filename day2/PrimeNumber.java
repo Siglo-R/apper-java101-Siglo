@@ -3,25 +3,25 @@ import java.util.Scanner;
 class PrimeNumber {
     public static void main(String[] args) {
         Scanner scanner= new Scanner(System.in);
-        int ent_num = scanner.nextInt();
+        int entNum = scanner.nextInt();
         int ctr=0;
         boolean FALSE=false;
         boolean TRUE=true;
-        if(ent_num <=1){
+        if(entNum <=1){
 
-            System.out.println(FALSE);
+            System.out.printf("%B", FALSE);
         }
         else {
-            for (int i = 2; i <= ent_num; i++) {
-                if (ent_num % i == 0){
+            for (int i = 2; i <= entNum; i++) {
+                if (entNum % i == 0){
                     ctr++;
                 }
             }
             if (ctr<=1){
-                System.out.println(TRUE);
+                System.out.printf("%B", TRUE);
             }
             else {
-                System.out.println(FALSE);
+                System.out.printf("%B", FALSE);
             }
         }
     }
