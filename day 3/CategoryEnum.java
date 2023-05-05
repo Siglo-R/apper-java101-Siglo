@@ -6,11 +6,11 @@ class CategoryEnum {
         Category chosenCategory= Category.MEN;
 
         switch (chosenCategory){
-            case MEN: System.out.println("arf arf");break;
-            case WOMEN: System.out.println("meow meow"); break;
-            case KID: System.out.println("meeeh"); break;
-            case GRANDMA: System.out.println("mooo"); break;
-            case GRANDPA: System.out.println("luh"); break;
+            case MEN: System.out.println(13.57);break;
+            case WOMEN: System.out.println(20.45); break;
+            case KID: System.out.println(45.6); break;
+            case GRANDMA: System.out.println(56.67); break;
+            case GRANDPA: System.out.println(3.56); break;
             default: System.out.println("not your family please try again");
     }
 
