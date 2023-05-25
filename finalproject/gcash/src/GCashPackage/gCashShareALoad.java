@@ -1,79 +1,122 @@
 package GCashPackage;
 
-import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class gCashShareALoad {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Map<String, User> hashMap = new HashMap<>();
+        Map<String, User> userID = new HashMap<>();
 
-        hashMap.put("09175861661", new User("BOB", 100.0f));
-        hashMap.put("09175861662", new User("MARLEY", 100.0f));
-        hashMap.put("09175861663", new User("SETH", 100.0f));
-        hashMap.put("09175861664", new User("RYAN", 100.0f));
-        hashMap.put("09175861665", new User("FRITZ", 100.0f));
+        userID.put("09175861661", new User("BOB", 100.0f));
+        userID.put("09175861662", new User("MARLEY", 100.0f));
+        userID.put("09175861663", new User("SETH", 100.0f));
+        userID.put("09175861664", new User("RYAN", 100.0f));
+        userID.put("09175861665", new User("FRITZ", 100.0f));
 
         System.out.println("**Hi Welcome to Gcash! Please Register your account**");
-        System.out.print("Input your Number: ");
-        String userInput = scanner.nextLine();
 
-        if (hashMap.containsKey(userInput)) {
-            System.out.println("Number already exists. Exiting the program.");
-            return;
+        String userNumber;
+        while (true) {
+            System.out.print("Input your Number:");
+            userNumber = scanner.nextLine();
+
+            if (userNumber.length() != 11) {
+                System.out.println("Invalid number. Please try again");
+                continue;
+            }
+
+            if (userID.containsKey(userNumber)) {
+                System.out.println("Number already exists. Please try again");
+                continue;
+            }
+
+            break;
         }
 
-        System.out.print("Input Name: ");
-        String userValue = scanner.nextLine();
+        String userName;
+        while (true) {
+            System.out.print("Input Name: ");
+            userName = scanner.nextLine();
 
-        if (userValue == null || userValue.isEmpty()) {
-            System.out.println("Name must not be empty!");
-            return;
+            if (userName == null || userName.isEmpty()) {
+                System.out.println("Name must not be empty!");
+                continue;
+            }
+
+            break;
         }
 
-        float userFloatValue = 100.0f;
-        System.out.println("Default balance is added to your account!: " + userFloatValue);
-        hashMap.put(userInput, new User(userValue, userFloatValue));
+        float userBalance = 100.0f;
+        System.out.println("Hi " + userName + "! Thanks for registering with Gcash\nDefault balance is added to your account!: " + userBalance);
+        userID.put(userNumber, new User(userName, userBalance));
 
         System.out.println("**Share a load**");
-        System.out.print("Sender mobile number: ");
-        String senderNumber = scanner.nextLine();
+        String senderNumber;
+        while (true) {
+            System.out.print("Please Enter Sender mobile number:");
+            senderNumber = scanner.nextLine();
 
-        if (!hashMap.containsKey(senderNumber)) {
-            System.out.println("Recipient " + senderNumber + " not found!");
-            return;
+            if (!userID.containsKey(senderNumber)) {
+                System.out.println("Number " + senderNumber + " not found. Please try again.");
+                continue;
+            }
+
+            break;
         }
 
-        System.out.print("Recipient mobile number: ");
-        String recipientNumber = scanner.nextLine();
+        String getSenderName = userID.get(senderNumber).getName();
+        System.out.println("User Found!\n" + getSenderName + ": " + senderNumber);
 
-        if (recipientNumber.equals(senderNumber)) {
-            System.out.println("Sender and recipient shouldn't be the same!");
-            return;
+        String recipientNumber;
+        while (true) {
+            System.out.print("Please Enter Recipient mobile number:");
+            recipientNumber = scanner.nextLine();
+
+            if (recipientNumber.equals(senderNumber)) {
+                System.out.println("Sender and Recipient Number shouldn't be the same. Please try again.");
+                continue;
+            }
+
+            break;
         }
 
-        float senderBalance = hashMap.get(senderNumber).getBalance();
-        float recipientBalance = hashMap.get(recipientNumber).getBalance();
+        String getRecipientName = userID.get(recipientNumber).getName();
+        System.out.println("User Found!\n" + getRecipientName + ":" + recipientNumber);
+
+        System.out.println("Processing Transaction...");
+        float senderBalance = userID.get(senderNumber).getBalance();
+        float recipientBalance = userID.get(recipientNumber).getBalance();
+
         System.out.println("Sender balance: " + senderBalance);
         System.out.println("Recipient balance: " + recipientBalance);
 
-        while (true) {
-            System.out.print("Enter amount (enter a valid number): ");
+        boolean validBalance = false;
+        while (!validBalance) {
+            System.out.print("Enter amount (enter a valid number):");
             float amountEntered = scanner.nextFloat();
 
             if (amountEntered > senderBalance) {
                 System.out.println("Low Balance. Please try again.");
             } else {
-                float difference = senderBalance - amountEntered;
-                senderBalance-=difference;
-                recipientBalance+=difference;
-                System.out.println("Difference: " + difference);
-                System.out.println("Sender Balance: " + senderBalance);
-                System.out.println("Receiver Balance: " + recipientBalance);
-                break;
+                senderBalance -= amountEntered;  // Update sender's balance by subtracting the amount
+                recipientBalance += amountEntered;  // Update recipient's balance by adding the amount
+                System.out.println("Amount transferred successfully!\nThank you for using Gcash!");
+
+                // Update the balances in the user objects
+                userID.get(senderNumber).setBalance(senderBalance);
+                userID.get(recipientNumber).setBalance(recipientBalance);
+                validBalance = true;
             }
+        }
+
+        System.out.println("**Updated Balances**");
+        for (Map.Entry<String, User> entry : userID.entrySet()) {
+            String number = entry.getKey();
+            User user = entry.getValue();
+            System.out.println(user.getName() + ": " + number + " - Balance: " + user.getBalance());
         }
     }
 }
