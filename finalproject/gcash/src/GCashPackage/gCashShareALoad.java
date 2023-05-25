@@ -50,7 +50,7 @@ public class gCashShareALoad {
         }
 
         float userBalance = 100.0f;
-        System.out.println("Hi " + userName + "! Thanks for registering with Gcash\nDefault balance is added to your account!: " + userBalance);
+        System.out.println("Hi " + userName + "! Thanks for registering with Gcash\nDefault balance of " + userBalance + " is added to your account!");
         userID.put(userNumber, new User(userName, userBalance));
 
         System.out.println("**Share a load**");
