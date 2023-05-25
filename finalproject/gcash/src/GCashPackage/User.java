@@ -1,5 +1,5 @@
-package GCashPackage;
 
+package GCashPackage;
 public class User {
     private String name;
     private float balance;
@@ -17,11 +17,9 @@ public class User {
         return balance;
     }
 
-public User userInput()
-    public String toString() {
-        return "Name: " + name + "\nBalance: " + balance;
+    public void setBalance(float balance) {
+        this.balance = balance;
     }
 }
-
 
 
