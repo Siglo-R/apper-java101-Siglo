@@ -15,7 +15,7 @@ public class gCashShareALoad {
         userID.put("09175861663", new User("SETH", 100.0f));
         userID.put("09175861664", new User("RYAN", 100.0f));
         userID.put("09175861665", new User("FRITZ", 100.0f));
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         System.out.println("**Hi Welcome to Gcash! Please Register your account**");
 
         String userNumber;
@@ -52,7 +52,7 @@ public class gCashShareALoad {
         float userBalance = 100.0f;
         System.out.println("Hi " + userName + "! Thanks for registering with Gcash\nDefault balance of " + userBalance + " is added to your account!");
         userID.put(userNumber, new User(userName, userBalance));
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         System.out.println("**Share a load**");
         String senderNumber;
         while (true) {
@@ -78,6 +78,11 @@ public class gCashShareALoad {
             if (recipientNumber.equals(senderNumber)) {
                 System.out.println("Sender and Recipient Number shouldn't be the same. Please try again.");
                 continue;
+
+            }
+            else if (!userID.containsKey(recipientNumber)) {
+                System.out.println("Number " + recipientNumber + " not found. Please try again.");
+                continue;
             }
 
             break;
@@ -85,7 +90,7 @@ public class gCashShareALoad {
 
         String getRecipientName = userID.get(recipientNumber).getName();
         System.out.println("User Found!\n" + getRecipientName + ":" + recipientNumber);
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         System.out.println("Processing Transaction...");
         float senderBalance = userID.get(senderNumber).getBalance();
         float recipientBalance = userID.get(recipientNumber).getBalance();
@@ -111,7 +116,7 @@ public class gCashShareALoad {
                 validBalance = true;
             }
         }
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         System.out.println("**Updated Balances**");
         for (Map.Entry<String, User> entry : userID.entrySet()) {
             String number = entry.getKey();
